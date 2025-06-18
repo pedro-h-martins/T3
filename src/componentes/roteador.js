@@ -63,10 +63,7 @@ export default function Roteador() {
             return (
                 <>
                     <BarraNavegacao seletorView={selecionarView} tema="#e3f2fd" botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} />
-                    <div className="container">
-                        <h3 className="text-center mb-4">Área de Cadastros</h3>
-                        <BotoesCadastro seletorView={selecionarView} tema="#e3f2fd" telaAtiva={tela} />
-                    </div>
+                    <BotoesCadastro seletorView={selecionarView} tema="#e3f2fd" telaAtiva="" />
                 </>
             )
         } else if (tela === 'Cadastrar Cliente') {
