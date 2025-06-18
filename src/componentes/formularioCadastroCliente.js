@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-function FormularioCadastroCliente(props) {
+export default function FormularioCadastroCliente(props) {
     const formRef = useRef();
 
     const handleReset = (e) => {
@@ -66,6 +66,4 @@ function FormularioCadastroCliente(props) {
             </form>
         </div>
     );
-}
-
-export default FormularioCadastroCliente;
+};
