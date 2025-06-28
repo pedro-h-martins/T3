@@ -1,19 +1,12 @@
-.table-row {
-    transition: background-color 0.2s ease;
+.transition {
+    transition: all 0.2s ease-in-out;
+}
+
+.transition:hover {
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 @media (max-width: 768px) {
-    .mobile-label {
-        font-weight: 600;
-        margin-bottom: 0.25rem;
-    }
-    
-    .table-row:not(:last-child) {
-        border-bottom: 1px solid #dee2e6;
-        margin-bottom: 0.5rem;
-        padding-bottom: 0.5rem;
-    }
-
     [data-label] {
         display: grid;
         grid-template-columns: 90px 1fr;
@@ -23,9 +16,5 @@
     [data-label]:before {
         content: attr(data-label);
         font-weight: 600;
-    }
-
-    .row.py-3:not(:last-child) {
-        border-bottom: 1px solid #dee2e6;
     }
 }

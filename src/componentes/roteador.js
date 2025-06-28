@@ -1,111 +1,121 @@
-/* eslint-disable no-unused-vars */
 import { useState } from "react";
-import BarraNavegacao from "./barraNavegacao"
+import BarraNavegacao from "./barraNavegacao";
 import ListaCliente from "./listaCliente";
 import FormularioCadastroCliente from "./formularioCadastroCliente";
 import FormularioCadastroPet from "./formularioCadastroPet";
 import FormularioCadastroProduto from "./formularioCadastroProduto";
 import FormularioCadastroServico from "./formularioCadastroServico";
-import FormularioEditarPet from "./formularioEditarPet";
-import ProdutosServicos from "./tabelaProdutosServicosMaisConsumidos";
-import PagamentoCliente from "./tabelaPagamentoCliente";
-import ListaProduto from "./listaProdutos";
+import FormularioEditaPet from "./formularioEditarPet";
+import TabelaProdutosServicosMaisConsumidos from "./tabelaProdutosServicosMaisConsumidos";
+import TabelaPagamentoCliente from "./tabelaPagamentoCliente";
+import ListaProdutos from "./listaProdutos";
 import ListaServico from "./listaServicos";
 import BotoesCadastro from "./botoesCadastroCliente";
+import ListaTopClientes from "./listaTopclientes";
+import BotaoTopClientes from "./botaoTopClientes";
 
 export default function Roteador() {
-    const [tela, setTela] = useState('Clientes')
-    const selecionarView = (valor, e) => {
-        e.preventDefault()
-        setTela(valor)
-    }
-    const construirView = () => {
+    const [tela, setTela] = useState('Clientes');
+
+    const selecionarView = (novaTela, evento) => {
+        evento.preventDefault();
+        console.log(novaTela);
+        setTela(novaTela);
+    };
+
+    const render = () => {
+        let barraNavegacao = <BarraNavegacao seletorView={selecionarView} tema="#e3f2fd" botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} />
         if (tela === 'Clientes') {
             return (
                 <>
-                    <BarraNavegacao seletorView={selecionarView} tema="#e3f2fd" botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} />
+                    {barraNavegacao}
                     <ListaCliente tema="#e3f2fd" seletorView={selecionarView} />
                 </>
             )
         } else if (tela === 'Editar Pet') {
             return (
                 <>
-                    <BarraNavegacao seletorView={selecionarView} tema="#e3f2fd" botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} />
-                    <FormularioEditarPet tema="#e3f2fd" />
+                    {barraNavegacao}
+                    <FormularioEditaPet tema="#e3f2fd" />
                 </>
             )
         } else if (tela === 'Produtos e Serviços') {
             return (
-                <>  <BarraNavegacao seletorView={selecionarView} tema="#e3f2fd" botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} />
-                    <ProdutosServicos tema="#e3f2fd" />
+                <>
+                    {barraNavegacao}
+                    <TabelaProdutosServicosMaisConsumidos tema="#e3f2fd" />
                 </>
             )
         } else if (tela === 'Pagamento do Cliente') {
             return (
                 <>
-                    <BarraNavegacao seletorView={selecionarView} tema="#e3f2fd" botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} />
-                    <PagamentoCliente tema="#e3f2fd" />
+                    {barraNavegacao}
+                    <TabelaPagamentoCliente tema="#e3f2fd" />
+                </>
+            )
+        } else if (tela === 'Top Clientes') {
+            return (
+                <>
+                    {barraNavegacao}
+                    <BotaoTopClientes seletorView={selecionarView} viewAtual="Top Clientes" />
+                    <ListaTopClientes tema="#e3f2fd" seletorView={selecionarView} />
                 </>
             )
         } else if (tela === 'Produtos') {
             return (
-                <>  <BarraNavegacao seletorView={selecionarView} tema="#e3f2fd" botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} />
-                    <ListaProduto tema="#e3f2fd" />
+                <>
+                    {barraNavegacao}
+                    <ListaProdutos tema="#e3f2fd" />
                 </>
             )
         } else if (tela === 'Serviços') {
             return (
-                <>  <BarraNavegacao seletorView={selecionarView} tema="#e3f2fd" botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} />
+                <>
+                    {barraNavegacao}
                     <ListaServico tema="#e3f2fd" />
                 </>
             )
-        } else if (tela === 'Cadastros') {
+        } else if (tela === 'Cadastros' || tela === 'Cadastrar Cliente') {
             return (
                 <>
-                    <BarraNavegacao seletorView={selecionarView} tema="#e3f2fd" botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} />
-                    <BotoesCadastro seletorView={selecionarView} tema="#e3f2fd" telaAtiva="" />
-                </>
-            )
-        } else if (tela === 'Cadastrar Cliente') {
-            return (
-                <>
-                    <BarraNavegacao seletorView={selecionarView} tema="#e3f2fd" botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} />
-                    <BotoesCadastro seletorView={selecionarView} tema="#e3f2fd" telaAtiva={tela} />
+                    {barraNavegacao}
+                    <BotoesCadastro tema="#e3f2fd" seletorView={selecionarView} telaAtiva={tela === 'Cadastros' ? 'Cadastrar Cliente' : tela} />
                     <FormularioCadastroCliente tema="#e3f2fd" />
                 </>
             )
         } else if (tela === 'Cadastrar Pet') {
             return (
                 <>
-                    <BarraNavegacao seletorView={selecionarView} tema="#e3f2fd" botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} />
-                    <BotoesCadastro seletorView={selecionarView} tema="#e3f2fd" telaAtiva={tela} />
+                    {barraNavegacao}
+                    <BotoesCadastro tema="#e3f2fd" seletorView={selecionarView} telaAtiva={tela} />
                     <FormularioCadastroPet tema="#e3f2fd" />
                 </>
             )
         } else if (tela === 'Cadastrar Produto') {
             return (
                 <>
-                    <BarraNavegacao seletorView={selecionarView} tema="#e3f2fd" botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} />
-                    <BotoesCadastro seletorView={selecionarView} tema="#e3f2fd" telaAtiva={tela} />
+                    {barraNavegacao}
+                    <BotoesCadastro tema="#e3f2fd" seletorView={selecionarView} telaAtiva={tela} />
                     <FormularioCadastroProduto tema="#e3f2fd" />
                 </>
             )
         } else if (tela === 'Cadastrar Serviço') {
             return (
                 <>
-                    <BarraNavegacao seletorView={selecionarView} tema="#e3f2fd" botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} />
-                    <BotoesCadastro seletorView={selecionarView} tema="#e3f2fd" telaAtiva={tela} />
+                    {barraNavegacao}
+                    <BotoesCadastro tema="#e3f2fd" seletorView={selecionarView} telaAtiva={tela} />
                     <FormularioCadastroServico tema="#e3f2fd" />
                 </>
             )
         } else {
             return (
-                <BarraNavegacao seletorView={selecionarView} tema="#e3f2fd" botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} />
+                <>
+                    {barraNavegacao}
+                    <FormularioCadastroCliente tema="#e3f2fd" />
+                </>
             )
         }
     }
 
-    return (
-        construirView()
-    )
+    return render();
 }
